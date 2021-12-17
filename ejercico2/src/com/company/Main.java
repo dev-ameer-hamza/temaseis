@@ -36,10 +36,20 @@ public class Main {
         }
     }
 
-    public static Alumno buscarAlumno(ArrayList<Alumno> alumnos)
+    public static void buscarAlumno(ArrayList<Alumno> alumnos)
     {
         try{
             String codigo = JOptionPane.showInputDialog("Teclea el codigo que quiere buscar");
+            int x;
+            for(x=0;x< alumnos.size() && !alumnos.get(x).getCodigo().equals(codigo);x++){}
+            if (x == alumnos.size())
+            {
+                JOptionPane.showMessageDialog(null,"Alumno no encontrado");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null,alumnos.get(x));
+            }
         }catch (Exception e){
             System.out.println(e.getMessage());
         }

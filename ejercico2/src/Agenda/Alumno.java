@@ -49,5 +49,12 @@ public class Alumno {
         this.tel = tel;
     }
 
+    @Override
+
+    public String toString()
+    {
+        return "Alumno { codigo " + codigo + " nombre " + nombre + " domicilio " + domicilio + " telefono " + tel;
+    }
+
 
 }
