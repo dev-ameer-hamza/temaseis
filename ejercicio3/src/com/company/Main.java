@@ -4,22 +4,24 @@ import Modelo.Persona;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
-import java.util.zip.DataFormatException;
 import javax.swing.*;
 
 public class Main {
 
     public static void main(String[] args) {
         ArrayList<Persona> personas = new ArrayList<Persona>();
+        int menu;
         try {
-        do {
+         do {
             pedirInformacion(personas);
-        }while(JOptionPane.showConfirmDialog(null,"¿Quieres continuar?") == 0);
-    }catch(Exception e){
-        System.out.println(e.getMessage());
-    }
-    int menu = showMenu();
-    operaciones(personas,menu);
+         }while(JOptionPane.showConfirmDialog(null,"¿Quieres continuar?") == 0);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        do {
+            menu = showMenu();
+            operaciones(personas,menu);
+        }while(JOptionPane.showConfirmDialog(null,"Quieres repetir?") == 0);
     }
 
     public static void pedirInformacion(ArrayList<Persona> personas) {
@@ -109,7 +111,20 @@ public class Main {
         showVecinosDeElche(vecinosDeElche);
     }
 
-    public static void mayoresDeEdad(ArrayList<Persona> personas){}
+    public static void mayoresDeEdad(ArrayList<Persona> personas){
+        ArrayList<Persona> mayores = new ArrayList<Persona>();
+        for (int x=0;x < personas.size();x++){
+            int dia = personas.get(x).getDiaNacimiento();
+            int mes = personas.get(x).getMesNacimiento();
+            int ano = personas.get(x).getAnoNacimiento();
+            boolean res = calcularEdad(dia,mes,ano);
+            if (res){
+                mayores.add(personas.get(x));
+            }
+        }
+
+        JOptionPane.showMessageDialog(null,"Hay " + mayores.size() +" personas que son mayores de edad");
+    }
 
     public static void showVecinosDeElche(ArrayList<Persona> vecinosDeElche){
         String vecinos = "En Elche viven \n";
@@ -124,5 +139,17 @@ public class Main {
         }
 
         JOptionPane.showMessageDialog(null,vecinos);
+    }
+
+    public static boolean calcularEdad(int dia,int mes,int ano){
+        LocalDate nacimiento = LocalDate.of(ano,mes,dia);
+        LocalDate hoy = LocalDate.now();
+
+        Period edad = Period.between(nacimiento,hoy);
+
+        if (edad.getYears() >= 18){
+            return true;
+        }
+        else {  return false; }
     }
 }
