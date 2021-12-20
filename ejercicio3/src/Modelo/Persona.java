@@ -1,6 +1,7 @@
 package Modelo;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 public class Persona {
     private String nombre;
@@ -88,8 +89,13 @@ public class Persona {
         return "Persona";
     }
 
-   /* public LocalDate calcularEdad(String edad)
-    {
+    public boolean calcularEdad(){
+        LocalDate nacimiento = LocalDate.of(anoNacimiento,mesNacimiento,anoNacimiento);
+        LocalDate hoy = LocalDate.now();
 
-    }*/
+        Period edad = Period.between(nacimiento,hoy);
+
+        return edad.getYears() >= 18;
+    }
+
 }

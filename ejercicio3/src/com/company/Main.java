@@ -117,7 +117,7 @@ public class Main {
             int dia = personas.get(x).getDiaNacimiento();
             int mes = personas.get(x).getMesNacimiento();
             int ano = personas.get(x).getAnoNacimiento();
-            boolean res = calcularEdad(dia,mes,ano);
+            boolean res = personas.get(x).calcularEdad();
             if (res){
                 mayores.add(personas.get(x));
             }
@@ -141,15 +141,4 @@ public class Main {
         JOptionPane.showMessageDialog(null,vecinos);
     }
 
-    public static boolean calcularEdad(int dia,int mes,int ano){
-        LocalDate nacimiento = LocalDate.of(ano,mes,dia);
-        LocalDate hoy = LocalDate.now();
-
-        Period edad = Period.between(nacimiento,hoy);
-
-        if (edad.getYears() >= 18){
-            return true;
-        }
-        else {  return false; }
-    }
 }
